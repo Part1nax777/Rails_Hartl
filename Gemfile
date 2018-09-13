@@ -53,6 +53,7 @@ group :test do
   gem 'guard-minitest'
   gem 'guard'
   gem 'wdm', '>= 0.1.0'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
