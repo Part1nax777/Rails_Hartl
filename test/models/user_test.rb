@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-        def setup
+	attr_accessor :name, :email
+	def setup 
 	@user = User.new(name: "Example User", email: "user@example.com")
 	end
 
@@ -20,12 +21,12 @@ class UserTest < ActiveSupport::TestCase
 	end
 	
 	test "name should be too long" do
-	@user.name = "a" * 51
+	@user.name = ("a" * 51)
 	assert_not @user.valid?
 	end
 
 	test "email should be too long" do
-	@user.email = "a" * 244 + "@example.com"	
+	@user.email = ("a" * 244 + "@example.com")	
 	assert_not @user.valid?
 	end
 
@@ -44,5 +45,11 @@ class UserTest < ActiveSupport::TestCase
 		assert_not @user.valid?, "#{invalid_addresses.inspect} should be invalid"
 		end
 	end
-	
+
+	test "email addresses should be unique" do
+	duplicate_user = @user_dup
+	duplicate_user.email = @user.email.upcase
+	@user.save
+	assert_not duplicate_user.valid?
+	end
 end
