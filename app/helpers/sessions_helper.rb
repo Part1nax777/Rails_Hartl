@@ -12,6 +12,12 @@ module SessionsHelper
 	  cookies.permanent[:remember_token] = user.remember_token
 	end
 
+	# ¬озвращает true, если данный пользователь €вл€етс€ текущим
+	def current_user?(user)
+	user == current_user
+	end
+
+
 	# ¬озврат текущего пользовател€
 	def current_user 
 	  if (user_id = session[:user_id])
@@ -42,5 +48,15 @@ module SessionsHelper
 	session.delete(:user_id)
 	@current_user = nil
 	end
- 
+
+	# ѕеренаправление по сохраненному адресу или на страницу по умолчанию
+	def redirect_back_or(default)
+	redirect_to(session[:forwarding_url] || default)
+	session.delete(:forwarding_url)
+	end
+
+	# «апоминает URL
+	def store_location
+	session[:forwarding_url] = request.original_url if request.get?
+	end	 
 end
