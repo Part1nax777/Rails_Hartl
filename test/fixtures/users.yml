@@ -4,6 +4,7 @@ serewka:
   name: Serewka
   email: spsserega@gmail.com
   password_digest: <%= User.digest('example') %>
+  admin: true
 
 archer:
   name: Green Arrow
