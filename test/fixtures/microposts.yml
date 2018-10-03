@@ -1,17 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 orange:
-  content: "I just ate an orange"
-  created_at: <%= 10.minutes.ago %>
+ content: "I just ate an orange"
+ created_at: <%= 10.minutes.ago %>
+ user: serewka
 
 tau_manifesto:
-  content: "Check out the @tauday site by @mhartl: http://tauday.com"
-  created_at" <%= 3.years.ago %>
+ content: "Check out the @tauday site by @mhartl: http://tauday.com"
+ created_at: <%= 3.years.ago %>
+ user: serewka
 
 cat_video:
-  content: "Sad cats are sad: http://youto.be/Pkffm2uI4dk"
-  created_at: <%= 2.hours.ago %>
+ content: "Sad cats are sad: http://youto.be/Pkffm2uI4dk"
+ created_at: <%= 2.hours.ago %>
+ user: serewka
 
 most_recent:
-  content: "Writing a short test"
-  created_at: <%= Time.zone.now %>
+ content: "Writing a short test"
+ created_at: <%= Time.zone.now %>
+ user: serewka
+
+<% 30.times do |n| %>
+micropost_<%= n %>:
+ content: <%= Faker::Lorem.sentence(5) %>
+ created_at: <%= 42.days.ago %>
+ user: serewka
+<% end %>
