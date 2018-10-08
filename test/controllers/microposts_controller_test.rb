@@ -20,6 +20,7 @@ test "should redirect destroy when not logged in" do
 	assert_redirected_to login_url
 end
 
+
 test "should redirect destroy for wrong micropost" do
 	log_in_as(users(:serewka))
 	micropost = microposts(:ants)
