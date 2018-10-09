@@ -76,4 +76,33 @@ class UserTest < ActiveSupport::TestCase
 	@user.destroy
 	end
 	end
+
+	test "should follow and unfollow user" do
+	serewka = users(:serewka)
+	archer = users(:archer)
+	assert_not serewka.following?(archer)
+	serewka.follow(archer)
+	assert serewka.following?(archer)
+	assert archer.followers.include?(serewka)
+	serewka.unfollow(archer) 
+	assert_not serewka.following?(archer)
+	end
+
+	test "feed should have the right posts" do 
+	serewka = users(:serewka)
+	archer = users(:archer)
+	lana = users(:lana)
+	# Сообщения читаемого пользователя
+	lana.microposts.each do |post_following|
+	assert serewka.feed.include?(post_following)
+	end
+	# Собственные сообщения 
+	serewka.microposts.each do |post_self|
+	assert serewka.feed.include?(post_self)
+	end 
+	# Сообщения не читаемого пользователя 
+	archer.microposts.each do |post_unfollowed|
+	assert_not serewka.feed.include?(post_unfollowed)
+	end
+	end 
 end
