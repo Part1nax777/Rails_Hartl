@@ -35,6 +35,8 @@ gem 'jquery-rails'
 gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :production do
   gem 'puma', '~> 3.7'
