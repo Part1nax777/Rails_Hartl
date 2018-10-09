@@ -78,7 +78,8 @@ class User < ApplicationRecord
 	# Определяет прото ленту
 	# Полная реализация в 12 главе
 	def feed
-	Micropost.where("user_id = ?", id)
+	following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
+	Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
 	end
 
 	# Выполняет подписку на сообщения пользователя
